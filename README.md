@@ -1,2 +1,2 @@
-# advent_of_code_2022
-Advent of Code Challenge 2022
+# Advent of Code 
+A repo to hold the code for solving Advent of Code Challenges in 2022

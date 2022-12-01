@@ -5,9 +5,15 @@ from collections import Counter
 def create_elf_dict(filename):
     """
     Create an elf dict to represent the total calories held by each elf.
-    :param filename:
-    :return: dict
-        a dictionary of elves and their total calories
+
+    Parameters
+    ----------
+    filename (str) the path to the input text file
+
+    Returns
+    -------
+    dict: a dictionary of elves and their total calories
+
     """
     with open(filename) as file:
         # initialize dict of elves
@@ -23,7 +29,6 @@ def create_elf_dict(filename):
                 calories = 0
                 elf_count += 1
     return elves
-
 
 def main(num_top_elves):
     # read in the data
@@ -41,4 +46,4 @@ def main(num_top_elves):
         print(calories)
 
 if __name__ == '__main__':
-    main(num_top_elves=3)
+    main(num_top_elves=1)

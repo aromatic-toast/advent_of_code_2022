@@ -46,21 +46,53 @@ def find_error(rucksack):
     error = list(compartment1.intersection(compartment2))[0]
     return error
 
+def find_badge(rucksacks):
+    """
+    Return the item that is common between the 3 rucksacks
+    Parameters
+    ----------
+    rucksacks (list) A list of rucksacks
+
+    Returns
+    -------
+    str
+        The item that intersects between the 3 rucksacks
+
+    """
+    sack1 = rucksacks[0]
+    sack2 = rucksacks[1]
+    sack3 = rucksacks[2]
+    # get the intersection between the 3 sets
+    badge = list(set(sack1) & set(sack2) & set(sack3))[0]
+    return badge
 
 def main():
     #  initialize rucksacks dict
+    elf_groups = []
     rucksacks = []
     # load the data
     with open("input.txt") as file:
+        i = 1
+        group_num = 1
         for line in file:
             # turn string of char into a list of items in the rucksack
             rucksack = [x for x in line.strip("\n")]
             # add the rucksack to a list of rucksacks
             rucksacks.append(rucksack)
-    # get the errors in all the rucksacks
-    errors = list(map(find_error, rucksacks))
+            if i % 3 == 0:
+                # add list of rucksacks to master list of elf groups
+                elf_groups.append(rucksacks)
+                # reset the list of rucksacks back to empty
+                rucksacks = []
+                group_num += 1
+
+            i += 1
+
+    # get the badges for each elf group
+    badges = list(map(find_badge, elf_groups))
+
     # get list of priorities
-    priority_list = list(map(get_priority, errors))
+    priority_list = list(map(get_priority, badges))
 
     # get the sum of the priorities
     priority_sum = sum(priority_list)

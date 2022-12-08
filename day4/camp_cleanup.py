@@ -42,10 +42,16 @@ def main():
              list_of_pairs = [x.split("-") for x in line.strip("\n").split(",")]
              pair1 = [int(x) for x in list_of_pairs[0]]
              pair2 = [int(x) for x in list_of_pairs[1]]
-             if pair1_in_pair2(pair1, pair2) or pair2_in_pair1(pair1, pair2):
+             # turn the pairs into a set of numbers in the range
+             pair1_set = set(range(pair1[0], pair1[1] + 1, 1))
+             pair2_set = set(range(pair2[0], pair2[1] + 1, 1))
+             len_of_intersection = len(pair1_set.intersection(pair2_set))
+
+             # check for any overlaps between the pairs
+             if len_of_intersection > 0:
                  # add to the count
                  num_pairs += 1
-         print("Sum of pairs fully contained in other pair: ", num_pairs)
+         print("Sum of pairs overlapping: ", num_pairs)
 
 if __name__ == '__main__':
     main()
